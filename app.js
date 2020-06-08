@@ -1,9 +1,5 @@
-/* eslint-disable no-undef */
 const express = require('express')
-const debug = require('debug')('app')
 const morgan = require('morgan'); //logger
-const path = require('path')
-const chalk = require('chalk')
 const bodyParser = require('body-parser')
 
 const app = express();
@@ -13,9 +9,9 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.use(morgan('tiny'))
 
 
-const mailingRouter = require('./src/routes/mailingRoutes')()
+const mailingRouter = require('./api/routes/mailingRoutes')()
 
-app.use('/mailer', mailingRouter);
+app.use('/api/v1', mailingRouter);
 
 app.get('/', (req, res) => {
   res.send('home')
