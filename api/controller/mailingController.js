@@ -7,36 +7,35 @@ function mailingController() {
       try {
         let { recipients, subject, body, cc, bcc } = req.body
         debug(recipients, subject, body)
-        if (!recipients || !subject || !body) {
+        if (!subject || !body) {
           res.status(400).send({
             status: false,
             message: 'These fields are required'
           })
           return
         }
+        if (recipients !== '^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$') {
+          res.status(400).send({
+            status: false,
+            message: 'Please input a valid email'
+          })
+          return
+        }
 
         let mailOptions = {
-          from: 'kay.nazirite@gmail.com',
+          from: 'Team Fierce Mailing API <kay.nazirite@gmail.com>',
           to: recipients,
+          cc: [],
           bcc: [],
           subject: subject,
           text: body,
-          html: `<h1>Lets see how this works</h1>
-            <p>get your <a href="https://google.com"><strong>Email</strong></a> today</p>`,
-          amp: ``,
-          attachments: [
-            {
-              filename: 'Azumini River',
-              path: 'https://res.cloudinary.com/lollykrown/image/upload/v1587044018/Tourist/azumini_river/azumini1.jpg'
-            }
-          ]
         };
 
         let transporter = nodemailer.createTransport({
           service: 'gmail',
           auth: {
-            user: '',
-            pass: ''
+            user: process.env.USER,
+            pass: process.env.PASSWORD
           }
         });
 
@@ -57,29 +56,37 @@ function mailingController() {
       try {
         let { recipients, subject, body, cc, bcc } = req.body
         debug(recipients, subject, body)
-        if (!recipients || !subject || !body) {
+        if (!subject || !body) {
           res.status(400).send({
             status: false,
             message: 'These fields are required'
           })
           return
         }
+        // if (recipients.match(mailFormat)) {
+        //   res.json({msg: true})
+        //   res.status(400).send({
+        //     status: false,
+        //     message: 'Please input a valid email'
+        //   })
+        //   return
+        // }
 
         let mailOptions = {
-          from: 'kay.nazirite@gmail.com',
+          from: 'Team Fierce Mailing API <kay.nazirite@gmail.com>',
           to: recipients,
           bcc: [],
           subject: subject,
           // html: `<h1>Lets see how this works</h1>
           //   <p>get your <a href="https://google.com"><strong>Email</strong></a> today</p>`,
-          html: body,
-        };
+          html: body
+        }
 
         let transporter = nodemailer.createTransport({
           service: 'gmail',
           auth: {
-            user: '',
-            pass: ''
+            user: process.env.USER,
+            pass: process.env.PASSWORD
           }
         });
 
