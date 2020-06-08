@@ -7,17 +7,10 @@ function mailingController() {
       try {
         let { recipients, subject, body, cc, bcc } = req.body
         debug(recipients, subject, body)
-        if (!subject || !body) {
+        if (!recipients || !subject || !body) {
           res.status(400).send({
             status: false,
             message: 'These fields are required'
-          })
-          return
-        }
-        if (recipients !== '^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$') {
-          res.status(400).send({
-            status: false,
-            message: 'Please input a valid email'
           })
           return
         }
@@ -42,7 +35,7 @@ function mailingController() {
         transporter.sendMail(mailOptions, function (err, info) {
           if (err) debug(err);
           debug(`Email sent: ${info.response}`);
-          res.status(200).json({ info });
+          res.status(200).json({ status: 'success', data: {message: 'mail sent successfully'} });
         })
 
       } catch (err) {
@@ -56,7 +49,7 @@ function mailingController() {
       try {
         let { recipients, subject, body, cc, bcc } = req.body
         debug(recipients, subject, body)
-        if (!subject || !body) {
+        if (!recipients || !subject || !body) {
           res.status(400).send({
             status: false,
             message: 'These fields are required'
@@ -77,8 +70,6 @@ function mailingController() {
           to: recipients,
           bcc: [],
           subject: subject,
-          // html: `<h1>Lets see how this works</h1>
-          //   <p>get your <a href="https://google.com"><strong>Email</strong></a> today</p>`,
           html: body
         }
 
@@ -93,7 +84,7 @@ function mailingController() {
         transporter.sendMail(mailOptions, function (err, info) {
           if (err) debug(err);
           debug(`Email sent: ${info.response}`);
-          res.status(200).json({ info });
+          res.status(200).json({ status: 'success', data: {message: 'mail sent successfully'} });
         })
 
       } catch (err) {
