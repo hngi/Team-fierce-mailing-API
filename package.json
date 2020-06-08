@@ -1,0 +1,24 @@
+{
+  "name": "team-fierce-mailing-api",
+  "version": "1.0.0",
+  "description": "mailing api",
+  "main": "app.js",
+  "scripts": {
+    "start": "nodemon app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lollykrown/Team-fierce-mailing-API.git"
+  },
+  "keywords": [
+    "mail",
+    "api"
+  ],
+  "author": "Kayode Agboola",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/lollykrown/Team-fierce-mailing-API/issues"
+  },
+  "homepage": "https://github.com/lollykrown/Team-fierce-mailing-API#readme"
+}
