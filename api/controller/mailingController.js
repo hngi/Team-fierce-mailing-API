@@ -7,13 +7,13 @@ function mailingController() {
       try {
         let { recipients, subject, body, cc, bcc } = req.body;
         debug(recipients, subject, body);
-        if (!recipients || !subject || !body) {
-          res.status(400).send({
-            status: false,
-            message: 'These fields are required',
-          });
-          return;
-        }
+        // if (!recipients || !subject || !body) {
+        //   res.status(400).send({
+        //     status: false,
+        //     message: 'These fields are required',
+        //   });
+        //   return;
+        // }
 
         let mailOptions = {
           from: 'Team Fierce Mailing API <kay.nazirite@gmail.com>',
