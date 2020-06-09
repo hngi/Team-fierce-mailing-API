@@ -187,7 +187,8 @@ function mailingController() {
         let mailOptions = {
           from: "Team Fierce Mailing API <kay.nazirite@gmail.com>",
           to: recipients,
-          bcc: [],
+          cc: cc, //added cc field and removed the empty array
+          bcc: bcc, //removed empty array
           subject: subject,
           html: body,
         };
