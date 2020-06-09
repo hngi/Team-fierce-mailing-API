@@ -5,7 +5,8 @@
   "main": "app.js",
   "scripts": {
     "start": "set DEBUG=app,app:* & nodemon app.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "docker:build": "docker-compose up -d --build"
   },
   "repository": {
     "type": "git",
@@ -26,6 +27,7 @@
     "debug": "^4.1.1",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
+    "express-validator": "^6.5.0",
     "morgan": "^1.10.0",
     "nodemailer": "^6.4.8",
     "nodemon": "^2.0.4"
