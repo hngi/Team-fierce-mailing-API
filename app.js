@@ -1,8 +1,7 @@
 const express = require("express");
 const morgan = require("morgan"); //logger
 const bodyParser = require("body-parser");
-const path = require("path");
-require("dotenv").config({ path: "./.env" });
+require("dotenv").config();
 
 const app = express();
 
