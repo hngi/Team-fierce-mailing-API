@@ -1,0 +1,195 @@
+{
+  "openapi": "3.0.0",
+  "servers": [
+    {
+      "description": "Development server",
+      "url": "http:/localhost:4000"
+    }
+  ],
+  "info": {
+    "description": "HNG i7 Team Fierce API",
+    "version": "1.0.0",
+    "title": "Team Fierce Mailing API",
+    "contact": {
+      "email": ""
+    },
+    "license": {
+      "name": "Apache 2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+    }
+  },
+  "tags": [
+    {
+      "name": "users",
+      "description": "Operations available to all users"
+    }
+  ],
+  "paths": {
+    "api/v1/sendmail": {
+      "post": {
+        "tags": ["users"],
+        "summary": "send mail",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SendMailRequestSchema"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "signup successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SendMailResponseSchema"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "validation errors",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SendMailErrorResponseSchema"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "api/v1/sendmailwithtemplate": {
+      "post": {
+        "tags": ["users"],
+        "summary": "send mail",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SendMailRequestSchema"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "signup successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SendMailResponseSchema"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "validation errors",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SendMailErrorResponseSchema"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "SendMailRequestSchema": {
+        "required": ["body", "recipients", "subject"],
+        "properties": {
+          "recipients": {
+            "type": "string",
+            "format": "email",
+            "example": "teamfierce@hngseven.com"
+          },
+          "subject": {
+            "type": "string",
+            "example": "Generic Email Subject"
+          },
+          "body": {
+            "type": "string",
+            "example": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras accumsan interdum consequat. Duis quis sem in lorem fringilla dapibus. Integer tincidunt ornare mauris, at efficitur odio finibus sit amet. Aliquam posuere magna eu mi fermentum, nec ultrices ex maximus. Etiam elementum turpis vel massa bibendum, vel maximus elit sodales. Fusce ligula lorem, placerat in augue pharetra, gravida lacinia quam. Donec eget nisi ac nisi tristique pellentesque."
+          },
+          "cc": {
+            "type": "string",
+            "format": "email",
+            "example": "teamfierce@hngseven.com"
+          },
+          "bcc": {
+            "type": "string",
+            "format": "email",
+            "example": "teamfierce@hngseven.com"
+          }
+        }
+      },
+      "SendMailResponseSchema": {
+        "properties": {
+          "status": {
+            "type": "string",
+            "example": "success"
+          },
+          "data": {
+            "properties": {
+              "message": {
+                "type": "string",
+                "example": "mail sent successfully"
+              }
+            }
+          }
+        }
+      },
+      "SendMailErrorResponseSchema": {
+        "properties": {
+          "status": {
+            "type": "string",
+            "example": "error"
+          },
+          "error": {
+            "type": "object",
+            "properties": {
+              "message": {
+                "type": "string",
+                "example": "validation error"
+              },
+              "errors": {
+                "type": "object",
+                "properties": {
+                  "recipients": {
+                    "type": "string",
+                    "example": "This field is required"
+                  },
+                  "bcc": {
+                    "type": "string",
+                    "example": "Value is not a valid email"
+                  },
+                  "cc": {
+                    "type": "string",
+                    "example": "Value is not a valid email"
+                  },
+                  "title": {
+                    "type": "string",
+                    "example": "This field is required"
+                  },
+                  "body": {
+                    "type": "string",
+                    "example": "This field is required"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
