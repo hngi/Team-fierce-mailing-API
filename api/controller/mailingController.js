@@ -35,7 +35,7 @@ function mailingController() {
         transporter.sendMail(mailOptions, function (err, info) {
           if (err) debug(err);
           debug(`Email sent: ${info.response}`);
-          res.status(200).json({ status: 'success', data: {message: 'mail sent successfully'} });
+          res.status(200).json({ status: 'success', data: { message: 'mail sent successfully' } });
         })
 
       } catch (err) {
@@ -84,7 +84,7 @@ function mailingController() {
         transporter.sendMail(mailOptions, function (err, info) {
           if (err) debug(err);
           debug(`Email sent: ${info.response}`);
-          res.status(200).json({ status: 'success', data: {message: 'mail sent successfully'} });
+          res.status(200).json({ status: 'success', data: { message: 'mail sent successfully' } });
         })
 
       } catch (err) {
