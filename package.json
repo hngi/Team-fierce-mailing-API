@@ -22,6 +22,7 @@
   },
   "homepage": "https://github.com/lollykrown/Team-fierce-mailing-API#readme",
   "dependencies": {
+    "@hapi/joi": "^17.1.1",
     "body-parser": "^1.19.0",
     "debug": "^4.1.1",
     "dotenv": "^8.2.0",
