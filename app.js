@@ -1,6 +1,6 @@
 const express = require('express')
 const morgan = require('morgan'); //logger
-const mailController = require('./api/rcontroller/mailing');
+const mailController = require('./api/controller/mailingController');
 require('dotenv').config()
 
 const app = express();
