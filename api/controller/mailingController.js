@@ -16,7 +16,7 @@ function mailingController() {
         }
 
         let mailOptions = {
-          from: 'Team Fierce Mailing API <kay.nazirite@gmail.com>',
+          from: 'Team Fierce Mailing API <ayodelesaba@gmail.com>',
           to: recipients,
           cc: [],
           bcc: [],
