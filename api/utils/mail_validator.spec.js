@@ -1,3 +1,5 @@
+/* eslint-env mocha */
+
 const assert = require('assert');
 const {validate} = require('./mail_validator'); 
 
@@ -62,13 +64,33 @@ describe('Schemas Validation', () => {
 
     validate(sampleMail, 'sendmail')
       .then(value => {
-        assert.ok(!value);
-        done()
+		console.log(value);
       })
       .catch(err => {
         assert.ok(err);
         done();
       })
+  });
+  
+  it('test required fields', (done) => {
+  	const faultyMail = {
+  	  from: 'somebody.mail.com',
+  	  recipient: 'email@add.com',
+  	  subject: '',	// cannot be empty
+  	  body: ''
+  	}
+  	
+  	validate(faultyMail, 'sendmail')
+  	  .then(value => {
+  	    //console.log(value);
+  	    assert.ok(value);
+  	    done();
+  	  })
+  	  .catch(err => {
+  	    //console.log(err);
+  	    assert.ok(err)
+  	    done();
+  	  });
   });
 
 });

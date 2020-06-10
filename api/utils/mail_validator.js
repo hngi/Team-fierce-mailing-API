@@ -14,7 +14,7 @@ const schemaValidator = (object, type) => {
     const {error, value} = schema[type](Joi).validate(object);
 
     if (error) {
-      reject(new Error(`invalid ${type} data, error: ${error}`));
+      reject(new Error(`Invalid ${type} data, ${error}`));
     }
     resolve(value);
   });
