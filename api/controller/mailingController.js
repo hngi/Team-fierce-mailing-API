@@ -1,22 +1,29 @@
 const debug = require('debug')('app:mailingController');
 const nodemailer = require('nodemailer');
+const {validateEmail} = require('../utils/mail_validator');
 
 function mailingController() {
   function sendMail(req, res) {
     (async function mail() {
       try {
-        let { recipients, subject, body, cc, bcc } = req.body
-        debug(recipients, subject, body)
+        let { recipients, subject, body, cc, bcc } = req.body;
+        debug(recipients, subject, body);
         if (!recipients || !subject || !body) {
           res.status(400).send({
-            status: false,
-            message: 'These fields are required'
+            status: 'failed',
+            data: {message: 'Add recipients, subject and body.'}
           })
           return
         }
-
+        let emailsAreValid = validateEmail(recipients);
+        if(!emailsAreValid){
+          res.status(400).send({
+            status: 'failed',
+            data: {message: 'Invalid email!'}
+          })
+        }else{
         let mailOptions = {
-          from: 'Team Fierce Mailing API <kay.nazirite@gmail.com>',
+          from: 'Team Fierce Mailing Service <hngteamfierce@gmail.com>',
           to: recipients,
           cc: [],
           bcc: [],
@@ -33,11 +40,18 @@ function mailingController() {
         });
 
         transporter.sendMail(mailOptions, function (err, info) {
-          if (err) debug(err);
+          if (err) {
+            res.status(500).send({
+              status: 'failed',
+              data: {message: 'An unknown error occured!'}
+            });
+            debug(err);
+          }
           debug(`Email sent: ${info.response}`);
           res.status(200).json({ status: 'success', data: {message: 'mail sent successfully'} });
         })
-
+        //
+        }
       } catch (err) {
         debug(err.stack)
       }
@@ -51,22 +65,22 @@ function mailingController() {
         debug(recipients, subject, body)
         if (!recipients || !subject || !body) {
           res.status(400).send({
-            status: false,
-            message: 'These fields are required'
+            status: 'failed',
+            data: {message: 'Add recipients, subject and body.'}
           })
           return
         }
-        // if (recipients.match(mailFormat)) {
-        //   res.json({msg: true})
-        //   res.status(400).send({
-        //     status: false,
-        //     message: 'Please input a valid email'
-        //   })
-        //   return
-        // }
 
+        let emailsAreValid = validateEmail(recipients);
+        if(!emailsAreValid){
+          res.status(400).send({
+            status: 'failed',
+            data: {message: 'Invalid email!'}
+          })
+        }else{
+      
         let mailOptions = {
-          from: 'Team Fierce Mailing API <kay.nazirite@gmail.com>',
+          from: 'Team Fierce Mailing Service <hngteamfierce@gmail.com>',
           to: recipients,
           bcc: [],
           subject: subject,
@@ -82,10 +96,18 @@ function mailingController() {
         });
 
         transporter.sendMail(mailOptions, function (err, info) {
-          if (err) debug(err);
+          if (err) {
+            res.status(500).send({
+              status: 'failed',
+              data: {message: 'An unknown error occured!'}
+            });
+            debug(err);
+          }
           debug(`Email sent: ${info.response}`);
           res.status(200).json({ status: 'success', data: {message: 'mail sent successfully'} });
         })
+        //
+      }
 
       } catch (err) {
         debug(err.stack)
