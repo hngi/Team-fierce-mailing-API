@@ -5,6 +5,8 @@
   "main": "app.js",
   "scripts": {
     "start": "set DEBUG=app,app:* & nodemon app.js",
+    "pmstart": "set DEBUG=app,app:* & pm2 start app.js",
+    "pmstop": "pm2 stop all",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -25,9 +27,11 @@
     "body-parser": "^1.19.0",
     "debug": "^4.1.1",
     "dotenv": "^8.2.0",
+    "email-validator": "^2.0.4",
     "express": "^4.17.1",
     "morgan": "^1.10.0",
     "nodemailer": "^6.4.8",
-    "nodemon": "^2.0.4"
+    "nodemon": "^2.0.4",
+    "pm2": "^4.4.0"
   }
 }
