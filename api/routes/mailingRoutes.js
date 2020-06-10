@@ -1,14 +1,8 @@
-const express = require('express');
-const mailingRouter = express.Router();
-const mailingController = require('../controller/mailingController')
-
-function router() {
+module.exports = (router, mailingController) => {
   const { sendMail, sendMailWithTemplate } = mailingController()
 
-  mailingRouter.route('/sendmail').post(sendMail)
-  mailingRouter.route('/sendmailwithtemplate').post(sendMailWithTemplate)
+  router.route('/sendmail').post(sendMail)
+  router.route('/sendmailwithtemplate').post(sendMailWithTemplate)
 
-  return mailingRouter
-}
-
-module.exports = router;
+  return router
+};

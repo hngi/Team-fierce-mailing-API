@@ -1,19 +1,17 @@
 const express = require('express')
 const morgan = require('morgan'); //logger
-const bodyParser = require('body-parser')
+const mailController = require('./api/rcontroller/mailing');
 require('dotenv').config()
 
 const app = express();
 
-app.use(bodyParser.json())
-app.use(bodyParser.urlencoded({ extended: false }))
+app.use(express.json())
+app.use(express.urlencoded())
 app.use(morgan('tiny'))
 
-
-const mailingRouter = require('./api/routes/mailingRoutes')()
+const mailingRouter = require('./api/routes/mailingRoutes')(express.Router(), mailController);
 
 app.use('/api/v1', mailingRouter);
-
 app.get('/', (req, res) => {
   res.send('home')
 });
@@ -21,5 +19,4 @@ app.get('/', (req, res) => {
 port = 4000
 app.listen(port, function () {
   console.log(`Listening on port ${port}...`)
-})
-
+});

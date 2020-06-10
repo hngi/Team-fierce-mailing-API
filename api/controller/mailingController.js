@@ -56,14 +56,6 @@ function mailingController() {
           })
           return
         }
-        // if (recipients.match(mailFormat)) {
-        //   res.json({msg: true})
-        //   res.status(400).send({
-        //     status: false,
-        //     message: 'Please input a valid email'
-        //   })
-        //   return
-        // }
 
         let mailOptions = {
           from: 'Team Fierce Mailing API <kay.nazirite@gmail.com>',
