@@ -15,7 +15,7 @@ function mailingController() {
           })
           return
         }
-        let emailsAreValid = validateEmail(recipients);
+        let emailsAreValid = validateEmail(recipients, cc, bcc);
         if(!emailsAreValid){
           res.status(400).send({
             status: 'failed',
@@ -43,7 +43,7 @@ function mailingController() {
           if (err) {
             res.status(500).send({
               status: 'failed',
-              data: {message: 'An unknown error occured!'}
+              data: {message: 'An unknown error occurred!'}
             });
             debug(err);
           }
@@ -71,7 +71,7 @@ function mailingController() {
           return
         }
 
-        let emailsAreValid = validateEmail(recipients);
+        let emailsAreValid = validateEmail(recipients, bcc);
         if(!emailsAreValid){
           res.status(400).send({
             status: 'failed',

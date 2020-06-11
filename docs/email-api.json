@@ -152,14 +152,14 @@
         "properties": {
           "status": {
             "type": "string",
-            "example": "error"
+            "example": "failed"
           },
-          "error": {
+          "data": {
             "type": "object",
             "properties": {
               "message": {
                 "type": "string",
-                "example": "validation error"
+                "example": "Add recipients, subject and body."
               },
               "errors": {
                 "type": "object",
@@ -170,11 +170,11 @@
                   },
                   "bcc": {
                     "type": "string",
-                    "example": "Value is not a valid email"
+                    "example": "Invalid email"
                   },
                   "cc": {
                     "type": "string",
-                    "example": "Value is not a valid email"
+                    "example": "Invalid email"
                   },
                   "title": {
                     "type": "string",
