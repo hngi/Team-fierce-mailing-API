@@ -1,30 +1,39 @@
 const debug = require('debug')('app:mailingController');
 const nodemailer = require('nodemailer');
 const {validateEmail} = require('../utils/mail_validator');
+const {validateToken} = require('../utils/token_validator');
 
 function mailingController() {
   function sendMail(req, res) {
     (async function mail() {
       try {
-        let { recipients, subject, body, cc, bcc } = req.body;
-        debug(recipients, subject, body);
-        if (!recipients || !subject || !body) {
-          res.status(400).send({
-            status: 'failed',
-            data: {message: 'Add recipients, subject and body.'}
+        let { recipient_name,recipient_email,sender_name,sender_email, subject, body, account_id, access_token } = req.body;
+        //debug(recipients, subject, body);
+        if(!validateToken(account_id, access_token)){
+          res.status(403).send({
+            status: 'error',
+            data: {message: 'Access Denied.'}
           })
           return
         }
-        let emailsAreValid = validateEmail(recipients);
+        if (!recipient_email || !subject || !body || account_id || access_token) {
+          res.status(400).send({
+            status: 'failed',
+            data: {message: 'Add recipients email, subject and body.'}
+          })
+          return
+        }
+        let emailsAreValid = validateEmail(recipient_email);
         if(!emailsAreValid){
           res.status(400).send({
             status: 'failed',
             data: {message: 'Invalid email!'}
           })
         }else{
+          let from = `${sender_name} <${sender_email}>`;
         let mailOptions = {
-          from: 'Team Fierce Mailing Service <hngteamfierce@gmail.com>',
-          to: recipients,
+          from: from,
+          to: recipient_email,
           cc: [],
           bcc: [],
           subject: subject,
@@ -61,31 +70,38 @@ function mailingController() {
   function sendMailWithTemplate(req, res) {
     (async function mail() {
       try {
-        let { recipients, subject, body, cc, bcc } = req.body
-        debug(recipients, subject, body)
-        if (!recipients || !subject || !body) {
-          res.status(400).send({
-            status: 'failed',
-            data: {message: 'Add recipients, subject and body.'}
+        let { recipient_name,recipient_email,sender_name,sender_email, subject, body, account_id, access_token } = req.body;
+        //debug(recipients, subject, body);
+        if(!validateToken(account_id, access_token)){
+          res.status(403).send({
+            status: 'error',
+            data: {message: 'Access Denied.'}
           })
           return
         }
-
-        let emailsAreValid = validateEmail(recipients);
+        if (!recipient_email || !subject || !body || account_id || access_token) {
+          res.status(400).send({
+            status: 'failed',
+            data: {message: 'Add recipients email, subject and body.'}
+          })
+          return
+        }
+        let emailsAreValid = validateEmail(recipient_email);
         if(!emailsAreValid){
           res.status(400).send({
             status: 'failed',
             data: {message: 'Invalid email!'}
           })
         }else{
-      
+          let from = `${sender_name} <${sender_email}>`;
         let mailOptions = {
-          from: 'Team Fierce Mailing Service <hngteamfierce@gmail.com>',
-          to: recipients,
+          from: from,
+          to: recipient_email,
+          cc: [],
           bcc: [],
           subject: subject,
-          html: body
-        }
+          html: body,
+        };
 
         let transporter = nodemailer.createTransport({
           service: 'gmail',
@@ -107,8 +123,7 @@ function mailingController() {
           res.status(200).json({ status: 'success', data: {message: 'mail sent successfully'} });
         })
         //
-      }
-
+        }
       } catch (err) {
         debug(err.stack)
       }

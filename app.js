@@ -10,9 +10,11 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.use(morgan('tiny'))
 
 
-const mailingRouter = require('./api/routes/mailingRoutes')()
+const mailingRouter = require('./api/routes/mailingRoutes')();
+const userRouter = require('./api/routes/userRoutes');
 
-app.use('/api/v1', mailingRouter);
+app.use('/v1/mail', mailingRouter);
+app.use('/v1/user', userRouter);
 
 app.get('/', (req, res) => {
   res.send('home')
