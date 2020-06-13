@@ -1,0 +1,322 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Team Fierce Mailer",
+    "contact": {},
+    "version": "1.0"
+  },
+  "servers": [
+    {
+      "url": "https://localhost:6060/v1",
+      "variables": {}
+    }
+  ],
+  "paths": {
+    "/user/register": {
+      "post": {
+        "tags": [
+          "Misc"
+        ],
+        "summary": "register",
+        "description": "Create a new api user account",
+        "operationId": "register",
+        "parameters": [],
+        "requestBody": {
+          "description": "",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/registerrequest"
+              },
+              "example": {
+                "name": "Jafar 3",
+                "email": "kamsy74@gmail.com",
+                "organisation": "HNGi7"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/user/configure": {
+      "post": {
+        "tags": [
+          "Misc"
+        ],
+        "summary": "configure",
+        "description": "Change User preference. (choose SMTP or SES)",
+        "operationId": "configure",
+        "parameters": [],
+        "requestBody": {
+          "description": "",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/configurerequest"
+              },
+              "example": {
+                "protocol": "SES",
+                "account_id": "58417",
+                "access_token": "5txSd5SSbO4Dng3"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/mail/sendmail": {
+      "post": {
+        "tags": [
+          "Misc"
+        ],
+        "summary": "sendmail",
+        "description": "Send Email in Plain Text",
+        "operationId": "sendmail",
+        "parameters": [],
+        "requestBody": {
+          "description": "",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/sendmailrequest"
+              },
+              "example": {
+                "recipient_name": "Jafar",
+                "recipient_email": "kamsy74@gmail.com",
+                "sender_name": "Kamz",
+                "sender_email": "jkams008@gmail.com",
+                "subject": "ULTIMATE FIERCE",
+                "body": "This email must deliver",
+                "account_id": "67812",
+                "access_token": "tuEHKVfuWzekw4i"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/mail/sendmailwithtemplate": {
+      "post": {
+        "tags": [
+          "Misc"
+        ],
+        "summary": "send mail with template",
+        "description": "Send Email using HTML Templates.",
+        "operationId": "sendmailwithtemplate",
+        "parameters": [],
+        "requestBody": {
+          "description": "",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/sendmailwithtemplaterequest"
+              },
+              "example": {
+                "recipient_name": "Jafar",
+                "recipient_email": "kamsy74@gmail.com",
+                "sender_name": "Kamz",
+                "sender_email": "jkams008@gmail.com",
+                "subject": "ULTIMATE FIERCE",
+                "body": "<strong>TOPIC</strong><p>Body of this mail</p>",
+                "account_id": "67812",
+                "access_token": "tuEHKVfuWzekw4i"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        },
+        "deprecated": false
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "registerrequest": {
+        "title": "registerrequest",
+        "required": [
+          "name",
+          "email",
+          "organisation"
+        ],
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "organisation": {
+            "type": "string"
+          }
+        },
+        "example": {
+          "name": "Jafar 3",
+          "email": "kamsy74@gmail.com",
+          "organisation": "HNGi7"
+        }
+      },
+      "configurerequest": {
+        "title": "configurerequest",
+        "required": [
+          "protocol",
+          "account_id",
+          "access_token"
+        ],
+        "type": "object",
+        "properties": {
+          "protocol": {
+            "type": "string"
+          },
+          "account_id": {
+            "type": "string"
+          },
+          "access_token": {
+            "type": "string"
+          }
+        },
+        "example": {
+          "protocol": "SES",
+          "account_id": "58417",
+          "access_token": "5txSd5SSbO4Dng3"
+        }
+      },
+      "sendmailrequest": {
+        "title": "sendmailrequest",
+        "required": [
+          "recipient_name",
+          "recipient_email",
+          "sender_name",
+          "sender_email",
+          "subject",
+          "body",
+          "account_id",
+          "access_token"
+        ],
+        "type": "object",
+        "properties": {
+          "recipient_name": {
+            "type": "string"
+          },
+          "recipient_email": {
+            "type": "string"
+          },
+          "sender_name": {
+            "type": "string"
+          },
+          "sender_email": {
+            "type": "string"
+          },
+          "subject": {
+            "type": "string"
+          },
+          "body": {
+            "type": "string"
+          },
+          "account_id": {
+            "type": "string"
+          },
+          "access_token": {
+            "type": "string"
+          }
+        },
+        "example": {
+          "recipient_name": "Jafar",
+          "recipient_email": "kamsy74@gmail.com",
+          "sender_name": "Kamz",
+          "sender_email": "jkams008@gmail.com",
+          "subject": "ULTIMATE FIERCE",
+          "body": "This email must deliver",
+          "account_id": "67812",
+          "access_token": "tuEHKVfuWzekw4i"
+        }
+      },
+      "sendmailwithtemplaterequest": {
+        "title": "sendmailwithtemplaterequest",
+        "required": [
+          "recipient_name",
+          "recipient_email",
+          "sender_name",
+          "sender_email",
+          "subject",
+          "body",
+          "account_id",
+          "access_token"
+        ],
+        "type": "object",
+        "properties": {
+          "recipient_name": {
+            "type": "string"
+          },
+          "recipient_email": {
+            "type": "string"
+          },
+          "sender_name": {
+            "type": "string"
+          },
+          "sender_email": {
+            "type": "string"
+          },
+          "subject": {
+            "type": "string"
+          },
+          "body": {
+            "type": "string"
+          },
+          "account_id": {
+            "type": "string"
+          },
+          "access_token": {
+            "type": "string"
+          }
+        },
+        "example": {
+          "recipient_name": "Jafar",
+          "recipient_email": "kamsy74@gmail.com",
+          "sender_name": "Kamz",
+          "sender_email": "jkams008@gmail.com",
+          "subject": "ULTIMATE FIERCE",
+          "body": "<strong>TOPIC</strong><p>Body of this mail</p>",
+          "account_id": "67812",
+          "access_token": "tuEHKVfuWzekw4i"
+        }
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Misc",
+      "description": ""
+    }
+  ]
+}
