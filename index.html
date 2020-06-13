@@ -5,162 +5,137 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Team Fierce Mailing Api Documentation</title>
-    <style>
-        body {
-            margin: 0;
-            background-color: white;
-            font-family: Arial, Helvetica, sans-serif;
-        }
-​
-        h1 {
-            text-align: center;
-        }
-​
-        table {
-            border-collapse: collapse;
-            width: 80%;
-            margin: auto;
-        }
-​
-        td{
-            border: 1px solid black;
-            text-align: left;
-            padding: 15px;
-        }
-        th {
-            border: 1px solid black;
-            text-align: left;
-            padding: 15px;
-        }
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
 ​
-<body style="width: 90%; margin: auto; margin-top: 50px;">
-    <h1>TEAM FIERCE API ENDPOINT SPECIFICATION</h1>
-    <table>
-        
-        <tr>
-            <th style="width: 5%;">SN</th>
-            <th style="width: 10%;">Feature</th>
-            <th style="width: 10%;">Endpoint</th>
-            <th style="width: 30%;">Request Spec</th>
-            <th style="width: 25%;">Response Spec</th>
-            <th style="width: 10%;">Comment</th>
-        </tr>
-        <tr>
-            <td>1</td>
-            <td>Create Account</td>
-            <td>POST<br>
-                /v1/user/register
-            </td>
-            <td>{
-                name: string<br>
-                email: string<br>
-                organisation: string<br>
-                }
-            </td>
-            <td>{<br>
-                status: “success”<br>
-                data: {<br>
-                message: “Account created”<br>
-                account_id: string<br>
-                access_token: string<br>
-                }<br>
-                }
-            </td>
-            <td>Register for API</td>
-        </tr>
-        <tr>
-            <td>2</td>
-            <td>Send mail</td>
-            <td>POST<br>/v1/mail/sendmail</td>
-            <td>{<br>
-                recipient_name: string<br>
-                recipient_email: string<br>
-                sender_name: string<br>
-                sender_email: string<br>
-                subject: string<br>
-                body: string<br>
-                account_id: string<br>
-                access_token: string<br>
-                }
-            </td>
-            <td>{<br>
-                status: “success”<br>
-                data: {<br>
-                message: “mail sent successfully”<br>
-                }<br>
-                }
-            </td>
-            <td>Send Plain Text Mail</td>
-        </tr>
-        <tr>
-            <td>3</td>
-            <td>Send mail with template</td>
-            <td>POST<br>
-                /v1/mail/sendmailwithtemplate
-            </td>
-            <td>{<br>
-                recipient_name: string<br>
-                recipient_email: string<br>
-                sender_name: string<br>
-                sender_email: string<br>
-                subject: string<br>
-                body: string<br>
-                account_id: string<br>
-                access_token: string<br>
-                }</td>
-            <td>{<br>
-                status: “success”<br>
-                data: {<br>
-                message: “mail sent successfully”<br>
-                }<br>
-                }</td>
-            <td>Send HTML Mail</td>
-​
-        </tr>
-        <tr>
-            <td>4</td>
-            <td>Configure</td>
-            <td>POST<br>
-                /v1/user/configure
-            </td>
-            <td>{
-                protocol: string<br>
-                account_id: string<br>
-                access_token: string<br>
-                }
-            </td>
-            <td>{<br>
-                status: “success”<br>
-                data: {<br>
-                message: “config updated”<br>
-                }<br>
-                }</td>
-            <td>Protocol can either be SMTP or SES, we will save this info in a database </td>
-        </tr>
-        <tr>
-            <td>5</td>
-            <td>Documentation Page</td>
-            <td>GET<br>
-                /
-            </td>
-            <td></td>
-            <td></td>
-            <td>Home Directory should show documentation</td>
-        </tr>
-        <tr>
-            <td>6</td>
-            <td>Documentation in JSON</td>
-            <td>GET<br>
-                /v1/documentation
-            </td>
-            <td></td>
-            <td></td>
-            <td>call that return the docs as json</td>
-        </tr>
-        
-    </table>
+<body>
+    <div class="container">
+        <h1>TEAM FIERCE API ENDPOINT SPECIFICATION</h1>
+        <table>
+            
+            <tr>
+                <th style="width: 5%;">SN</th>
+                <th style="width: 10%;" class="border-left">Feature</th>
+                <th style="width: 10%;" class="border-left">Endpoint</th>
+                <th style="width: 30%;" class="border-left">Request Spec</th>
+                <th style="width: 25%;" class="border-left">Response Spec</th>
+                <th style="width: 10%;" class="border-left">Comment</th>
+            </tr>
+            <tr>
+                <td class="light-bg">1</td>
+                <td class="border-left light-bg">Create Account</td>
+                <td class="border-left light-bg">POST<br>
+                    /v1/user/register
+                </td>
+                <td class="border-left light-bg">{ <br>
+                    name: string<br>
+                    email: string<br>
+                    organisation: string<br>
+                    }
+                </td>
+                <td class="border-left light-bg">{<br>
+                    status: “success”<br>
+                    data: {<br>
+                    message: “Account created”<br>
+                    account_id: string<br>
+                    access_token: string<br>
+                    }<br>
+                    }
+                </td>
+                <td class="border-left light-bg">Register for API</td>
+            </tr>
+            <tr>
+                <td class="border-top">2</td>
+                <td class="border-left border-top">Send mail</td>
+                <td class="border-left border-top">POST<br>/v1/mail/sendmail</td>
+                <td class="border-left border-top">{<br>
+                    recipient_name: string<br>
+                    recipient_email: string<br>
+                    sender_name: string<br>
+                    sender_email: string<br>
+                    subject: string<br>
+                    body: string<br>
+                    account_id: string<br>
+                    access_token: string<br>
+                    }
+                </td>
+                <td class="border-left border-top">{<br>
+                    status: “success”<br>
+                    data: {<br>
+                    message: “mail sent successfully”<br>
+                    }<br>
+                    }
+                </td>
+                <td class="border-left border-top">Send Plain Text Mail</td>
+            </tr>
+            <tr>
+                <td class="border-top light-bg">3</td>
+                <td class="border-left border-top light-bg">Send mail with template</td>
+                <td class="border-left border-top light-bg">POST<br>
+                    /v1/mail/sendmailwithtemplate
+                </td>
+                <td class="border-left border-top light-bg">{<br>
+                    recipient_name: string<br>
+                    recipient_email: string<br>
+                    sender_name: string<br>
+                    sender_email: string<br>
+                    subject: string<br>
+                    body: string<br>
+                    account_id: string<br>
+                    access_token: string<br>
+                    }</td>
+                <td class="border-left border-top light-bg">{<br>
+                    status: “success”<br>
+                    data: {<br>
+                    message: “mail sent successfully”<br>
+                    }<br>
+                    }</td>
+                <td class="border-left border-top light-bg">Send HTML Mail</td>
+    ​
+            </tr>
+            <tr>
+                <td class="border-top">4</td>
+                <td class="border-left border-top">Configure</td>
+                <td class="border-left border-top">POST<br>
+                    /v1/user/configure
+                </td>
+                <td class="border-left border-top">{
+                    protocol: string<br>
+                    account_id: string<br>
+                    access_token: string<br>
+                    }
+                </td>
+                <td class="border-left border-top">{<br>
+                    status: “success”<br>
+                    data: {<br>
+                    message: “config updated”<br>
+                    }<br>
+                    }</td>
+                <td class="border-left border-top">Protocol can either be SMTP or SES, we will save this info in a database </td>
+            </tr>
+            <tr>
+                <td class="border-top light-bg">5</td>
+                <td class="border-left border-top light-bg">Documentation Page</td>
+                <td class="border-left border-top light-bg">GET<br>
+                    /
+                </td>
+                <td class="border-left border-top light-bg"></td>
+                <td class="border-left border-top light-bg"></td>
+                <td class="border-left border-top light-bg">Home Directory should show documentation</td>
+            </tr>
+            <tr>
+                <td class="border-top">6</td>
+                <td class="border-left border-top">Documentation in JSON</td>
+                <td class="border-left border-top">GET<br>
+                    /v1/documentation
+                </td>
+                <td class="border-left border-top"></td>
+                <td class="border-left border-top"></td>
+                <td class="border-left border-top">call that return the docs as json</td>
+            </tr>
+            
+        </table>
+    </div>
 </body>
 ​
 </html>
