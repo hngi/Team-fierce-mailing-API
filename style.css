@@ -1,0 +1,76 @@
+/* CSS Reset */
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Root Color Variables */
+:root{
+  --primary-color: #36688d;
+}
+
+/* Body Styling */
+
+body{
+  background-color: #f4f4f4;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Border And Background Classes */
+
+.border-left{
+  border-left: 1px solid black;
+}
+
+.border-top{
+  border-top: 1px solid black;
+}
+
+.light-bg{
+  background-color: #eee;
+}
+
+/* Container and header */
+
+.container{
+  margin: auto;
+  max-width: 80%;
+  margin-top: 1rem;
+}
+
+h1{
+  text-align: center;
+  background: var(--primary-color);
+  padding: 1rem 0;
+  color: #fff;
+}
+
+/* Table Styling */
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+  background: #fff;
+}
+
+th{
+  background: var(--primary-color);
+  color: #fff;
+  font-weight: bold;
+  text-transform: uppercase;
+  padding: 1rem;
+  vertical-align: bottom;
+  border-bottom: 1px solid var(--primary-color);
+  text-align: left;
+}
+
+tr{
+  margin: 1rem;
+  padding: 1rem;
+}
+
+td{
+  color: #36688d;
+  padding: 1rem;
+}
