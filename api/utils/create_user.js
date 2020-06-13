@@ -1,3 +1,6 @@
+const {getConnection} = require('./db_connector');
+const connection = getConnection();
+
 exports.createAccount = (email, name, organisation, id, token, protocol='SMTP') => {
     let users={
         "name": name,
@@ -7,15 +10,14 @@ exports.createAccount = (email, name, organisation, id, token, protocol='SMTP') 
         "token":token,
         "protocol": protocol
     }
-    
+     
     connection.query('INSERT INTO users SET ?',users, function (error, results, fields) {
       if (error) {
+        console.log('DB Error: '+error);
+         
         return false
-      }
-      else{
-        return true
-      }
+      }       
     });
-
-    return false 
+     
+    return true 
 }

@@ -1,10 +1,14 @@
 const {createAccount} = require('../utils/create_user');
 const {validateEmail} = require('../utils/mail_validator');
 const {generateId, generateToken} = require('../utils/generate_string');
-const {validateToken} = require('../utils/token_validator');
-const {configureAccount} = require('../utils/configure_accout');
-//const debug = require('debug')('app:userController');
+ 
+//const {getConnection} = require('../utils/db_connector');
+//const connection = getConnection();
+const Database = require('../utils/db_class');
+const DB = new Database();
 
+//const debug = require('debug')('app:userController');
+ 
 exports.createUser = (req,res,next) => {
     const {name, email, organisation} = req.body;
     if (!name || !email || !organisation) {
@@ -34,8 +38,8 @@ exports.createUser = (req,res,next) => {
               return
         }else{
             res.status(500).send({
-                status: 'failed',
-                data: {message: 'unknown error!'}
+                status: 'error',
+                data: {message: 'error creating account!'}
               })
               return
         }
@@ -43,25 +47,49 @@ exports.createUser = (req,res,next) => {
 
 exports.configureUser = (req, res, next) => {
     const {protocol, account_id, access_token} = req.body;
-    if(!validateToken(account_id, access_token)){
-        res.status(403).send({
-          status: 'error',
-          data: {message: 'Access Denied.'}
+    //
+    let sql = 'SELECT * FROM users WHERE account_id = ?';
+    let sql2 = `UPDATE users
+                            SET protocol = ?
+                            WHERE account_id = ?`;
+    DB.query(sql, [account_id])
+        .then(rows =>{
+            if(rows.length>0){
+                console.log('User Exist with token: ~');
+                console.log(rows[0].token);
+                if(access_token == rows[0].token){
+                     
+                    return DB.query(sql2,[protocol,account_id]);
+                }
+                else{
+                    return new Promise((resolve, reject)=>reject('Invalid Token')) 
+                }
+            }
+            return new Promise((resolve, reject)=>reject('Invalid ID'))
+        }, err => {
+            //return DB.close().then( () => { throw err; } )
+            return new Promise((resolve, reject)=>reject(err))
+        } )
+        .then(rows => {
+            res.status(200).send({
+                status: 'success',
+                data: {message: 'protocol updated!'}
+              })
+              return
+        }, err => {
+            return new Promise((resolve, reject)=>reject(err))
         })
-        return 
-      } 
-      if(configureAccount(account_id,protocol)){
-        res.status(200).send({
-            status: 'success',
-            data: {message: 'protocol updated!'}
-          })
-          return
-      }
-      else{
-        res.status(500).send({
-            status: 'error',
-            data: {message: 'Unknown.'}
-          })
-          return 
-      }
+        .catch(err => {
+            console.log('DB Error: '+err);
+            res.status(500).send({
+                status: 'error',
+                data: {message: err}
+              })
+              return
+        })
+
+
+    //////////////
+    
+        
 }

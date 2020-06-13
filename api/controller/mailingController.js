@@ -9,14 +9,8 @@ function mailingController() {
       try {
         let { recipient_name,recipient_email,sender_name,sender_email, subject, body, account_id, access_token } = req.body;
         //debug(recipients, subject, body);
-        if(!validateToken(account_id, access_token)){
-          res.status(403).send({
-            status: 'error',
-            data: {message: 'Access Denied.'}
-          })
-          return
-        }
-        if (!recipient_email || !subject || !body || account_id || access_token) {
+        
+        if (!recipient_email || !subject || !body) {
           res.status(400).send({
             status: 'failed',
             data: {message: 'Add recipients email, subject and body.'}
@@ -72,14 +66,8 @@ function mailingController() {
       try {
         let { recipient_name,recipient_email,sender_name,sender_email, subject, body, account_id, access_token } = req.body;
         //debug(recipients, subject, body);
-        if(!validateToken(account_id, access_token)){
-          res.status(403).send({
-            status: 'error',
-            data: {message: 'Access Denied.'}
-          })
-          return
-        }
-        if (!recipient_email || !subject || !body || account_id || access_token) {
+        
+        if (!recipient_email || !subject || !body) {
           res.status(400).send({
             status: 'failed',
             data: {message: 'Add recipients email, subject and body.'}
